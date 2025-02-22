@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Micoed</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.14/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.14/theme/material-darker.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.14/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.14/mode/htmlmixed/htmlmixed.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(to bottom, #1e1e1e, #3a3a3a);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 900px;
+            background: rgba(40, 44, 52, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 24px;
+            text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8);
+        }
+        .editor-container {
+            margin-bottom: 15px;
+        }
+        .CodeMirror {
+            height: 300px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        button:active {
+            transform: scale(0.98);
+        }
+        iframe {
+            width: 100%;
+            height: 300px;
+            background: white;
+            border: 3px solid #007BFF;
+            border-radius: 8px;
+            display: block;
+            box-shadow: 0px 0px 15px rgba(0, 191, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✨ Micoed✨</h1>
+        <div class="editor-container">
+            <textarea id="code-editor">
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: Arial; background-color: #eef; }
+        h1 { color: blue; }
+    </style>
+</head>
+<body>
+    <h1>Hello, World!</h1>
+    <p>Start coding here...</p>
+    <script>
+        console.log("JavaScript is running!");
+    </script>
+</body>
+</html>
+            </textarea>
+            <button onclick="runCode()">🚀 Run Code</button>
+        </div>
+        <iframe id="output"></iframe>
+    </div>
+    <script>
+        var editor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
+            mode: "htmlmixed",
+            lineNumbers: true,
+            theme: "material-darker",
+            autoCloseBrackets: true,
+            autoCloseTags: true,
+            matchBrackets: true,
+            tabSize: 4,
+        });
+        function runCode() {
+            var code = editor.getValue();
+            var iframe = document.getElementById("output");
+            var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            iframeDoc.open();
+            iframeDoc.write(code);
+            iframeDoc.close();
+        }
+    </script>
+</body>
+</html>
